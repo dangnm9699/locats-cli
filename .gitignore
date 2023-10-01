@@ -1,0 +1,4 @@
+**/dist/**
+**/node_modules/**
+# TODO: figure out a way to lint this using flow instead of typescript
+examples/todos-flow

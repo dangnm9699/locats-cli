@@ -1,0 +1,44 @@
+{
+  "name": "locats-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "bin": {
+    "locats": "./dist/bin/locats.js"
+  },
+  "types": "./dist/bin/locats.d.ts",
+  "engines": {
+    "node": ">=16.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangnm9699/locats-cli.git"
+  },
+  "author": {
+    "name": "BSS",
+    "email": "info@bsscommerce.com"
+  },
+  "contributors": [
+    {
+      "name": "Cuong CX",
+      "email": "cuongcx@bsscommerce.com"
+    },
+    {
+      "name": "Dang NM",
+      "email": "dangnm@bsscommerce.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dangnm9699/locats-cli/issues"
+  },
+  "homepage": "https://github.com/dangnm9699/locats-cli#readme",
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
