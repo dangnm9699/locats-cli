@@ -11,6 +11,7 @@
     "node": ">=16.16.0"
   },
   "scripts": {
+    "build": "tsc --build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,6 +37,10 @@
     "url": "https://github.com/dangnm9699/locats-cli/issues"
   },
   "homepage": "https://github.com/dangnm9699/locats-cli#readme",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "isomorphic-fetch": "^3.0.0"
+  },
   "devDependencies": {
     "@types/node": "^20.8.0",
     "ts-node": "^10.9.1",
