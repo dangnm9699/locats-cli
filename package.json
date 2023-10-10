@@ -1,8 +1,7 @@
 {
-  "name": "locats-api",
+  "name": "locats",
   "version": "1.0.0",
-  "description": "",
-  "main": "",
+  "description": "Locats CLI",
   "bin": {
     "locats": "./dist/bin/locats.js"
   },

@@ -2,6 +2,7 @@ import { OptionValues, Command } from "commander";
 import DownloadCommand from "../commands/download.command";
 import fs from "fs";
 import path from "path";
+import colors from "colors";
 import BaseCommand from "./base";
 class Core extends BaseCommand {
     program: Command
@@ -21,31 +22,39 @@ class Core extends BaseCommand {
         this.program
           .command('download')
           .alias('dl')
-          .description('Download files')
-          .option('-p, --path <path>', 'The api-key that should be used')
+          .description('Download project')
+          .option('-p, --path <path>', 'The path that should be used')
           .action(async (options: OptionValues) => {
             let config;
             try {
                 config = this.loadConfigFile(options.configPath);
             } catch (e) {}
 
-            const projectKey = options.projectKey || config.projectKey;
-            if(!projectKey) {
-                console.error('Error: missing required argument `projectKey`');
-                process.exit(1);
-            }
-    
-            const apiKey = options.apiKey || config.apiKey;
+            const apiKey = options.apiKey || config["api-key"];
             if(!apiKey) {
-                console.error('Error: missing required argument `apiKey`');
-                process.exit(1);
+                console.log(colors.red('Error: missing required argument `apiKey`'));
+                return;
             }
 
-            const distPath = options.path || config.path || path.resolve(process.cwd());
+            const projectKey = options.projectKey || config["project-key"];
+            if(!projectKey) {
+                console.log(colors.red('Error: missing required argument `projectKey`'));
+                return;
+            }
+    
+            let distPath =
+                options.path && options.path[0] === "/" 
+                    ? options.path.substring(1) 
+                    : options.path ||
+                config.path || 
+                process.cwd();
+            
+            distPath = path.resolve(distPath);
+
             const command = new DownloadCommand({
                 apiUrl: options.apiUrl,
-                projectKey: projectKey,
                 apiKey: apiKey,
+                projectKey: projectKey,
                 distPath: distPath,
             });
             await command.run();
