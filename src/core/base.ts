@@ -16,7 +16,7 @@ export default class BaseCommand extends Command {
             cmd = super.command(nameAndArgs, descriptionOrOpts);
         }
         cmd
-            .option('-u, --api-url <apiUrl>', 'The api-url that should be used', 'http://localhost:3077')
+            .option('-u, --api-url <apiUrl>', 'The api-url that should be used', 'https://locats-api.bsscommerce.com')
             .option('-pk --project-key <projectKey>', 'The project-key that should be used')
             .option('-ak, --api-key <apiKey>', 'The api-key that should be used')
 
