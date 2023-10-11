@@ -23,7 +23,7 @@ class Core extends BaseCommand {
           .command('download')
           .alias('dl')
           .description('Download project')
-          .option('-p, --path <path>', 'The path that should be used')
+          .option('-p, --path <path>', 'Specify the path that should be used')
           .action(async (options: OptionValues) => {
             let config;
             try {
@@ -61,7 +61,7 @@ class Core extends BaseCommand {
         })
     }
     private loadConfigFile(configPath?: string) {
-        const rcFile = configPath || path.resolve(process.cwd(), '.locatsrc');
+        const rcFile = configPath || path.resolve(process.cwd(), 'locats.config.json');
         const rcFileResolved = path.resolve(rcFile);
         return fs.existsSync(rcFileResolved)
             ? JSON.parse(JSON.stringify(require(rcFileResolved)))

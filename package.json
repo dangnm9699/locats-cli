@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/dangnm9699/locats-cli#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "commander": "^11.0.0",
     "isomorphic-fetch": "^3.0.0"
   },

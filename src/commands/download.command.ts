@@ -5,18 +5,21 @@ import colors from "colors";
 import fs from "fs";
 import path from "path";
 
-interface DownloadItem {
+type DownloadItem = {
     url: string;
     language: string;
     namespace: string;
 }
-
-interface IResponse {
-    success: boolean;
-    data: DownloadItem[];
-    message: string;
+type FulfilledResult = {
+    dir: string;
+    file: string;
+    converted: any;
 }
-
+type IResponse = {
+    success: boolean;
+    data?: DownloadItem[];
+    message?: string;
+}
 export class DownloadCommand {
     apiUrl: string
     distPath: string
@@ -56,7 +59,7 @@ export class DownloadCommand {
     private async batchDownloader(savePath: string, arr: DownloadItem[], size: number) {
         try {
             const downloads = [...arr];
-            let promiseFulfilledResult: PromiseFulfilledResult<any>[] = [];
+            let promiseFulfilledResult: PromiseFulfilledResult<FulfilledResult>[] = [];
             while (downloads.length > 0) {
                 const promiseForDownload: Promise<any>[] = [];
                 const batch = downloads.splice(0, size);
@@ -90,12 +93,8 @@ export class DownloadCommand {
                             });
                             isError = true;
                         } else {
-                            promiseFulfilledResult.forEach(item => {
-                                if (item.status === "fulfilled") {
-                                    const download = item as PromiseFulfilledResult<any>;
-                                    promiseFulfilledResult.push(download);           
-                                }
-                            })
+                            const fulfilled = result.filter(promise => promise.status === "fulfilled") as PromiseFulfilledResult<FulfilledResult>[];
+                            promiseFulfilledResult = [...promiseFulfilledResult, ...fulfilled];
                         }
                     });
                 if(isError) {
@@ -104,7 +103,7 @@ export class DownloadCommand {
                 }
             }
             if(promiseFulfilledResult && promiseFulfilledResult.length) {
-                promiseFulfilledResult.forEach(download => {
+                promiseFulfilledResult.forEach((download) => {
                     const dir = download.value.dir;
                     const file = download.value.file;
                     const converted = download.value.converted;
