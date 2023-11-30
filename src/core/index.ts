@@ -61,7 +61,7 @@ class Core extends BaseCommand {
         })
     }
     private loadConfigFile(configPath?: string) {
-        const rcFile = configPath || path.resolve(process.cwd(), 'locats.config.json');
+        const rcFile = configPath || path.resolve(process.cwd(), 'locats.config.js');
         const rcFileResolved = path.resolve(rcFile);
         return fs.existsSync(rcFileResolved)
             ? JSON.parse(JSON.stringify(require(rcFileResolved)))

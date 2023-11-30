@@ -1,6 +1,6 @@
 {
   "name": "@tsdudes/locats",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Locats CLI",
   "bin": {
     "locats": "./dist/bin/locats.js"
